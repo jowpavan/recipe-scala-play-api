@@ -26,6 +26,7 @@ recipeDAO: RecipeDAO)(
 ) extends AbstractController(cc) with HasDatabaseConfigProvider[JdbcProfile] {
     import profile.api._
 
+    // TO-DO: Change Timestamp formatting from Long to String to make more user friendly
     def timestampToLong(t: Timestamp): Long = t.getTime
     def longToTimestamp(dt: Long): Timestamp = new Timestamp(dt)
 
@@ -75,7 +76,7 @@ recipeDAO: RecipeDAO)(
                 Json.fromJson[NewRecipe](_).asOpt 
             )
 
-        // TO-DO: Validate required fields
+        // TO-DO: Validate missing required fields to return proper message
 
         todoListRecipe match {
             case Some(n) =>
@@ -91,7 +92,7 @@ recipeDAO: RecipeDAO)(
                         Future.successful(Ok(Json.toJson(response)))
                 }
             case None =>
-                val response = CreateErrorResponse("Recipe creation failed!", "")
+                val response = CreateErrorResponse("Recipe creation failed!", "title, making_time, serves, ingredients, cost")
                 Future.successful(Ok(Json.toJson(response)))
         }
     }
