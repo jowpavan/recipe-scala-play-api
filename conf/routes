@@ -1,0 +1,6 @@
+# Routes
+GET     /recipes                    controllers.RecipeController.getAll()
+POST    /recipes                    controllers.RecipeController.addRecipe()
+PATCH   /recipes/:recipeId          controllers.RecipeController.patchRecipe(recipeId: Int)
+GET     /recipes/:recipeId          controllers.RecipeController.getRecipe(recipeId: Int)
+DELETE  /recipes/:recipeId          controllers.RecipeController.deleteRecipe(recipeId: Int)
